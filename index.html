@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Direct Manipulation of Analytic Implicit Surfaces</title>
+		<link rel="canonical" href="https://eliemichel.github.io/SdfManipulation" />
+		<link rel="stylesheet" href="normalize.css" />
+		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<body class="h-entry">
+		<h1 class="p-name"><a class="u-url" href="https://eliemichel.github.io/SdfManipulation">Direct Manipulation of Analytic Implicit Surfaces</a></h1>
+
+		<div class="s-venue">
+			ACM Transaction on Graphics (SIGGRAPH Asia '<time class="dt-published" datetime="2024-12-01 12:00:00">24</time>)
+		</div>
+
+		<div class="s-authorlist">
+			<div class="p-author h-card">
+				<a class="p-name u-url" href="https://marzia-riso.github.io">Marzia Riso</a>
+				<ul>
+					<li><a class="p-org h-card" href="https://www.uniroma1.it/en">Sapienza University of Rome</a></li>
+					<li><a class="p-org h-card" href="https://research.adobe.com">Adobe</a></li>
+				</ul>
+			</div>
+			<div class="p-author h-card">
+				<a class="p-name u-url" href="https://research.adobe.com/person/elie-michel">Élie Michel</a>
+				<ul>
+					<li><a class="p-org h-card" href="https://research.adobe.com/">Adobe</a></li>
+				</ul>
+			</div>
+			<div class="p-author h-card">
+				<a class="p-name u-url" href="https://aparis69.github.io">Axel Paris</a>
+				<ul>
+					<li><a class="p-org h-card" href="https://research.adobe.com/">Adobe</a></li>
+				</ul>
+			</div>
+			<div class="p-author h-card">
+				<a class="p-name u-url" href="https://valentin.deschaintre.fr/">Valentin Deschaintre</a>
+				<ul>
+					<li><a class="p-org h-card" href="https://research.adobe.com/">Adobe</a></li>
+				</ul>
+			</div>
+			<div class="p-author h-card">
+				<a class="p-name u-url" href="https://www.mgaillard.fr/">Mathieu Gaillard</a>
+				<ul>
+					<li><a class="p-org h-card" href="https://research.adobe.com/">Adobe</a></li>
+				</ul>
+			</div>
+			<div class="p-author h-card">
+				<a class="p-name u-url" href="https://xelatihy.github.io/">Fabio Pellacini</a>
+				<ul>
+					<li><a class="p-org h-card" href="https://international.unimore.it/">University of Modena and Reggio Emilia</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<main>
+			<figure>
+				<img alt="Teaser image" src="images/teaser.jpg" />
+				<figcaption>Our method enables the direct manipulation of procedural implicit surfaces through mouse strokes in the viewport. We estimate an update of the procedural parameters of the implicit surface that matches the user intent thanks to the auto-differentiation of an augmented version of the implicit function. As opposed to the typical workflow of updating parameters through sliders, our method enables a more direct and intuitive editing process.</figcaption>
+			</figure>
+
+			<ul class="s-download-links">
+				<li><a href="documents/riso24direct.pdf">Paper (3.0 MB)</a></li>
+				<li><a href="documents/riso24direct_lowres.pdf">Lowres Paper (1.6 MB)</a></li>
+				<li><a href="documents/riso24direct_supplemental.zip">Supplemental (1.0 MB)</a></li>
+				<li><a href="https://youtu.be/LmzikjDvSyA">Video</a></li>
+			</ul>
+
+			<section>
+				<h2>Abstract</h2>
+				<p class="p-summary s-content">
+	Procedural Implicit surfaces are a popular representation for shape modeling. They provide a simple framework for complex geometric operations such as Booleans, blending and deformations. However, their editability remains a challenging task: as the definition of the shape is purely implicit, direct manipulation of the shape cannot be performed. Thus, parameters of the model are often exposed through abstract sliders, which have to be non-trivially created by the user and understood by others for each individual model to modify. Further, each of these sliders needs to be set one by one to achieve the desired appearance. To circumvent this laborious process while preserving editability, we propose to directly manipulate the implicit surface in the viewport. We let the user naturally interact with the output shape, leveraging points on a co-parameterization we design specifically for implicit surfaces, to guide the parameter updates and reach the desired appearance faster. We leverage our automatic differentiation of the procedural implicit surface to propagate interactions made by the user in the viewport to the shape parameters themselves. We further design a solver that uses such information to guide an intuitive and smooth user workflow. We demonstrate different editing processes across multiple implicit shapes and parameters that would be tedious by tuning sliders.
+				</p>
+			</section>
+
+			<section>
+				<h2>Video</h2>
+				<!--
+				<figure>
+					<video controls poster="images/riso24direct-supplemental-video.jpg">
+						<source src="videos/riso24direct-supplemental-video.mp4" type="video/mp4">
+						Download: <a href="videos/riso24direct-supplemental-video.mp4">riso24direct-supplemental-video.mp4</a>
+					</video>
+				</figure>
+				-->
+				<iframe class="youtube" width="560" height="315" src="https://www.youtube.com/embed/LmzikjDvSyA?si=I4xYWhC6GhdVFqT3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+			</section>
+
+			<section>
+				<h2>Workflow</h2>
+				<figure>
+					<img alt="Input" src="images/input.jpg" class="small-figure" />
+					<figcaption>Our input is a <strong>procedural implicit shape</strong> represented by a <strong>scene graph</strong> (left), combining primitives, transformations Boolean operations, etc. Procedurally-defined shapes allow users to create a large variety of instances $\Phi(\theta)$ by tweaking the procedural parameters $\theta$ (right), but this is a nontrivial task as the user must understand the <strong>influence of each individual parameter</strong> over the model.</figcaption>
+				</figure>
+				<br/>
+				<figure>
+					<img alt="Pipeline" src="images/pipeline.jpg" />
+					<figcaption>Overview of our method. Starting from a scene graph representation of an implicit surface <strong>(a)</strong>, we automatically <strong>augment</strong> it so that the resulting implicit function $\bar{f}$ computes both the implicit value $s$ and a <strong>co-parameter</strong> $c$ that <strong>identifies</strong> the evaluation point in space <strong>(b)</strong>. We do this by replacing the eval, pre, post functions of the different nodes. This allows the estimation of the <strong>derivative of a position with respect to the procedural parameters</strong> of the shape, which in turn is used to modify them in order to match the user stroke <strong>(c)</strong>.</figcaption>
+				</figure>
+				<br/>
+				<figure>
+					<img alt="Versus libfive" src="images/vs-libfive.jpg" class="small-figure" />
+					<figcaption>When the user intends to drag points in a direction significantly different than the local surface normal <strong>(a)</strong>, our direct manipulation approach keeps track of the dragged point <strong>(b)</strong> while libfive’s solver only constrains that the overall surface passes by the new mouse position <strong>(c)</strong>. In this very example, libfive is never able to affect the lens position parameter.</figcaption>
+				</figure>
+			</section>
+
+			<section>
+				<h2>Results</h2>
+				<figure>
+					<img alt="Results 01" src="images/results01.jpg" />
+					<img alt="Results 02" src="images/results02.jpg" />
+					<img alt="Results 03" src="images/results03.jpg" />
+					<img alt="Results 04" src="images/results04.jpg" />
+					<img alt="Results 05" src="images/results05.jpg" />
+					<img alt="Results 06" src="images/results06.jpg" />
+					<figcaption>Editing sessions performed using our framework. For each example, the first image represents the original procedural implicit shape with a simplified semantical representation of its procedural parameter. The remaining images show the outcome of three consecutive edits that are performed on the implicit shape, including both constrained and unconstrained manipulations. For each edit, we report the selected points and the mouse trajectory, highlighting the procedural parameter update in the underlying sliders.</figcaption>
+				</figure>
+			</section>
+
+			<section>
+				<h2>Citation</h2>
+				<p class="s-citation">@article{riso24direct,
+	title = {Direct Manipulation of Analytic Implicit Surfaces},
+	author = {Riso, Marzia and Michel, Élie and Paris, Axel and Deschaintre, Valentin and Gaillard, Mathieu and Pellacini, Fabio},
+	journal = {ACM Transaction on Graphics (SIGGRAPH Asia '24 Conference Proceedings)},
+	year = {2024},
+	publisher = {ACM},
+	doi = {10.1145/nnnnnnn.nnnnnnn},
+}</p>
+			</section>
+
+			<footer>&nbsp;</footer>
+		</main>
+
+		<!-- MathJax configuration -->
+		<script>
+		MathJax = {
+			tex: {
+				inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+				processEscapes: true
+			}
+		};
+		</script>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	</body>
+</html>
