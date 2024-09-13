@@ -13,8 +13,6 @@ Citation
 	journal = {ACM Transaction on Graphics (SIGGRAPH Asia '24 Conference Proceedings)},
 	year = {2024},
 	publisher = {ACM},
-	doi = {10.1145/nnnnnnn.nnnnnnn},
+	doi = {10.1145/3687936},
 }
 ```
-
-**NB**: The doi is still WIP.
